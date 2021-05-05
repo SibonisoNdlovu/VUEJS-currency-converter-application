@@ -5,16 +5,14 @@
         <div class="row">
           <div class="col-md-6">
             <label>From</label>
-            <select name="" id="" class="form-control">
-              <option value=""> usd</option>
-              <option value=""> eur </option>
+            <select  class="form-control">
+                <option :value="currency.id" v-for="(currency) in currencies" :key="currency.id">{{currency.id}}</option>
             </select>
           </div>
           <div class="col-md-6">
             <label>To</label>
-            <select name="" id="" class="form-control">
-              <option value=""> eur </option>
-              <option value=""> usd</option>
+            <select  class="form-control">
+                <option :value="currency.id" v-for="(currency) in currencies" :key="currency.id">{{currency.id}}</option>
             </select>
           </div>
         </div>
@@ -50,7 +48,7 @@ export default defineComponent({
     return {
       from: "",
       to: "",
-      currencies: [] as Currency[],
+      currencies: [] as {id:string,value:any}[],
       value: "",
       convertedValue: ""
     };
@@ -71,7 +69,18 @@ export default defineComponent({
       ConverterService.getAllCurrencies()
         .then((response: ResponseData) => {
           this.currencies = response.data;
-          console.log(response.data);
+          const result : string[] = [];
+          let currencyList = [];
+            for (var f in response.data) {
+                currencyList.push({
+                    id: f,
+                    value: response.data[f]
+                })
+            }
+            
+          this.currencies = currencyList;
+          console.log(currencyList);
+          return currencyList;
         })
         .catch((e: Error) => {
           console.log(e);
