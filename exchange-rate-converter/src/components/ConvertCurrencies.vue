@@ -5,13 +5,15 @@
         <div class="row">
           <div class="col-md-6">
             <label>From</label>
-            <select  class="form-control">
+            <select name="from_id" @change="from($event)" class="form-control">    
+                <option value="" selected disabled>Choose</option>
                 <option :value="currency.id" v-for="(currency) in currencies" :key="currency.id">{{currency.id}}</option>
             </select>
           </div>
           <div class="col-md-6">
             <label>To</label>
-            <select  class="form-control">
+            <select name="from_id" @change="to($event)" class="form-control">              
+                <option value="" selected disabled>Choose</option>
                 <option :value="currency.id" v-for="(currency) in currencies" :key="currency.id">{{currency.id}}</option>
             </select>
           </div>
@@ -19,9 +21,13 @@
 
         <div class="row">
           <div class="col-md-6 offset-md-3">
-            <input type="text" placeholder="Amount" class="form-control my-5" />
+            <input type="text" v-model="amount" placeholder="Amount" class="form-control my-5" />
             <div class="text-center">
-              <div class="button btn-large btn-primary ">Convert</div>
+                   <form @submit.prevent="convert">
+                        <button type="submit">
+                            Convert
+                        </button>
+                    </form>
             </div>
           </div>
         </div>
@@ -40,22 +46,21 @@
 import { defineComponent } from "vue";
 import ConverterService from "@/services/ConverterService";
 import ResponseData from "@/types/ResponseData";
-import Currency from "@/types/Currency";
 
 export default defineComponent({
   name: "ConvertCurrencies",
   data() {
     return {
-      from: "",
-      to: "",
+      fromValue: "",
+      toValue: "",
       currencies: [] as {id:string,value:any}[],
-      value: "",
+      amount: "",
       convertedValue: ""
     };
   },
   methods: {
     convert() {
-        ConverterService.convert(this.value,this.from,this.to)
+        ConverterService.convert(this.amount,this.fromValue,this.toValue)
             .then((response: ResponseData) => {
                 this.convertedValue = response.data
                 console.log(response.data);
@@ -69,7 +74,6 @@ export default defineComponent({
       ConverterService.getAllCurrencies()
         .then((response: ResponseData) => {
           this.currencies = response.data;
-          const result : string[] = [];
           let currencyList = [];
             for (var f in response.data) {
                 currencyList.push({
@@ -85,6 +89,16 @@ export default defineComponent({
         .catch((e: Error) => {
           console.log(e);
         });
+    },
+
+    from(event:any){
+        this.fromValue= event.target.value
+        console.log(event.target.value)
+    },
+
+    to(event:any){
+        this.toValue= event.target.value
+        console.log(event.target.value)
     }
   },
   mounted() {
