@@ -1,74 +1,38 @@
 <template>
   <div class="list row">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="ZAR"
-          v-model="from"
-        />
-        <input
-          type="text"
-          class="form-control"
-          placeholder="USD"
-          v-model="to"
-        />
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Amount"
-          v-model="value"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            @click="convert"
-          >
-            Convert
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <h4>Tutorials List</h4>
-      <!-- <ul class="list-group">
-        <li
-          class="list-group-item"
-          :class="{ active: index == currentIndex }"
-          v-for="(tutorial, index) in tutorials"
-          :key="index"
-          @click="setActiveTutorial(tutorial, index)"
-        >
-          {{ tutorial.title }}
-        </li>
-      </ul> -->
-    </div>
-    <div class="col-md-6">
-      <div v-if="currentTutorial.id">
-        <h4>Tutorial</h4>
-        <div>
-          <label><strong>Title:</strong></label> {{ currentTutorial.title }}
-        </div>
-        <div>
-          <label><strong>Description:</strong></label>
-          {{ currentTutorial.description }}
-        </div>
-        <div>
-          <label><strong>Status:</strong></label>
-          {{ currentTutorial.published ? "Published" : "Pending" }}
+    <div id="app">
+      <div class="container my-5">
+        <div class="row">
+          <div class="col-md-6">
+            <label>From</label>
+            <select name="" id="" class="form-control">
+              <option value=""> usd</option>
+              <option value=""> eur </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>To</label>
+            <select name="" id="" class="form-control">
+              <option value=""> eur </option>
+              <option value=""> usd</option>
+            </select>
+          </div>
         </div>
 
-        <router-link
-          :to="'/tutorials/' + currentTutorial.id"
-          class="badge badge-warning"
-          >Edit</router-link
-        >
-      </div>
-      <div v-else>
-        <br />
-        <p>Please click on a Tutorial...</p>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <input type="text" placeholder="Amount" class="form-control my-5" />
+            <div class="text-center">
+              <div class="button btn-large btn-primary ">Convert</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <h1 class="text-center mt-5 display-2">56.3</h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>
