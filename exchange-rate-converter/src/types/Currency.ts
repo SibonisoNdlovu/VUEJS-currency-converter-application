@@ -1,4 +1,4 @@
-export default interface Tutorial {
-    id: string;
-    value: string;
-  }
+export default interface Currency {
+  id: string;
+  value: string;
+}

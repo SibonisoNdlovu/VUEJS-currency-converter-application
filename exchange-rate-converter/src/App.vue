@@ -5,6 +5,9 @@
         <li class="nav-item">
           <router-link to="/converter" class="nav-link">Converter</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/lineChart" class="nav-link">Chart</router-link>
+        </li>
       </div>
     </nav>
 

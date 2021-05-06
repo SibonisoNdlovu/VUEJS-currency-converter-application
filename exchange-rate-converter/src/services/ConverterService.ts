@@ -10,6 +10,10 @@ class ConverterService {
   convert(amount: any, from:string, to:string): Promise<any>{
     return http.post("https://openexchangerates.org/api/convert/"+amount+"/"+from+"/ "+to+"?app_id="+this.app_id+"")
   }
+
+  getTimeSeries(start: any, end: any, from:string, to:string): Promise<any> {
+      return http.post("https://openexchangerates.org/api/time-series.json ?app_id="+this.app_id+ "&start="+start+"&end="+end+"&base="+from+"&symbols="+to+"&prettyprint=1")
+  }
 }
 
 export default new ConverterService();

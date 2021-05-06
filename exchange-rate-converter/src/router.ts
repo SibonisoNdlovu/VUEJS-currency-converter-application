@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "converter",
     component: () => import("./components/ConvertCurrencies.vue"),
   },
+  {
+    path: "/lineChart",
+    name: "lineChart",
+    component: () => import("./components/LineChart.vue"),
+  }
 ];
 
 const router = createRouter({
