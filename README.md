@@ -9,3 +9,23 @@ I was not able to fully utilize the api as requested because the free addition h
 Thank you very much once again.
 
 Looking forward to hearing from you.
+
+## Project setup
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Builds the project and bundles in the dist directory.
