@@ -21,8 +21,11 @@ export default new Vuex.Store({
 
   mutations: {
     setCurrencyCode(state, { newValue, key }) {
-      if (key === "to" || key === "from") {
-        state.currencyCode[key] = newValue;
+      if (key === "to") {
+        state.currencyCode.to = newValue;
+      }
+      else if(key === "from") {
+        state.currencyCode.from = newValue;
       }
     },
     setStartDate(state, newValue) {
