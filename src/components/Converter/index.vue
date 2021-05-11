@@ -21,16 +21,7 @@
         {{ currency.id + " - " + currency.description }}
       </option>
     </select>
-
-    <label for="date">Initial date:</label>
-    <input
-      type="date"
-      id="date"
-      class="input input-date"
-      :max="yeterday"
-      :min="lastYear"
-      v-model="startDate"
-    />
+    
     <input
       type="text"
       v-model="amount"
@@ -40,7 +31,7 @@
 
     <button type="button" class="button" @click="handleConvertAmount">
       CONVERT
-    </button>'
+    </button>
 
     <div>
       <div>
@@ -49,18 +40,34 @@
       </div>
     </div>
 
-    <button type="button" class="button" @click="handle1Day">
-      1 Day
-    </button>   
-    <button type="button" class="button" @click="handle7Day">
-      7 Days
-    </button>   
-    <button type="button" class="button" @click="handle30Day">
-      30 Days
-    </button>   
-    <button type="button" class="button" @click="handle90Day">
-      90 Days
-    </button>
+    <table class="table">
+      <tr>
+        <th class="th">  
+          <button type="button" class="button" 
+          @click="handleGetCurrencyRates(1)">
+            1 Day
+          </button>
+        </th>
+        <th class="th">
+          <button type="button" class="button" 
+          @click="handleGetCurrencyRates(7)">
+            7 Days
+          </button>
+        </th>
+        <th class="th">
+          <button type="button" class="button" 
+          @click="handleGetCurrencyRates(30)">
+            30 Days
+          </button>
+        </th>
+        <th class="th">
+          <button type="button" class="button" 
+          @click="handleGetCurrencyRates(90)">
+            90 Days
+          </button>
+        </th>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -69,28 +76,22 @@ import { mapActions, mapState } from "vuex";
 import { getDateBeforeDays } from "@/utils";
 
 export default {
-  name: "InputGroup",
-  data() {
-    return {
-      yeterday: getDateBeforeDays(1),
-      lastYear: getDateBeforeDays(360),
-    };
-  },
   created() {
     this.getCurrenciesOptions();
   },
   methods: {
     ...mapActions(["getCurrenciesOptions", "getCurrencyRates", "convert" ]),
 
-    handleGetCurrencyRates() {
-      const { currencyCodeFrom, currencyCodeTo, startDate} = this;
+
+    handleGetCurrencyRates(days) {
+      let { currencyCodeFrom, currencyCodeTo, startDate} = this;   
+      startDate = getDateBeforeDays(days)
 
       this.getCurrencyRates({
         from: currencyCodeFrom,
         to: currencyCodeTo,
         startDate,
       });
-        console.log("daaaaaaaaaaaaaaaaaaaaaate", startDate)
       
       this.$emit("inputData", this.chartData);
     },
@@ -102,68 +103,9 @@ export default {
         amount: amount,
       });
       
-      this.handleGetCurrencyRates();
-    },
-    handle1Day() {
-      const { currencyCodeFrom, currencyCodeTo} = this;
-
-  var today = new Date()
-var date=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-1);
-      console.log("daaaaaaaaaaaaaaaaaaaaaate", date)
-
-      this.getCurrencyRates({
-        from: currencyCodeFrom,
-        to: currencyCodeTo,
-        date,
-      });
-      
-      console.log("emitemitemitemit", this.chartData)
-      this.$emit("inputData", this.chartData);
-    },
-    handle7Day() {
-      const { currencyCodeFrom, currencyCodeTo} = this;
-  var today = new Date()
-const date=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-7);
-      console.log("daaaaaaaaaaaaaaaaaaaaaate", date)
-      this.getCurrencyRates({
-        from: currencyCodeFrom,
-        to: currencyCodeTo,
-        date,
-      });
-      
-      console.log("emitemitemitemit", this.chartData)
-      this.$emit("inputData", this.chartData);
-    },
-    handle30Day() {
-      const { currencyCodeFrom, currencyCodeTo} = this;
-        var today = new Date()
-const date=today.getFullYear()+'-'+(today.getMonth())+'-'+(today.getDate());
-      console.log("daaaaaaaaaaaaaaaaaaaaaate", date)
-      this.getCurrencyRates({
-        from: currencyCodeFrom,
-        to: currencyCodeTo,
-        date,
-      });
-      
-      console.log("emitemitemitemit", this.chartData)
-      this.$emit("inputData", this.chartData);
-    },
-    handle90Day() {
-      const { currencyCodeFrom, currencyCodeTo} = this;
-        var today = new Date()
-const date=today.getFullYear()+'-'+(today.getMonth()-3)+'-'+(today.getDate());
-      console.log("daaaaaaaaaaaaaaaaaaaaaate", date)
-      this.getCurrencyRates({
-        from: currencyCodeFrom,
-        to: currencyCodeTo,
-        date,
-      });
-      
-      console.log("emitemitemitemit", this.chartData)
-      this.$emit("inputData", this.chartData);
+      this.handleGetCurrencyRates(7);
     },
   },
-
   computed: {
     ...mapState(["currenciesOptions"]),
 
@@ -220,15 +162,12 @@ const date=today.getFullYear()+'-'+(today.getMonth()-3)+'-'+(today.getDate());
 </script>
 
 <style scoped lang="scss">
-.input-group {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+.th {
+  width: 20%;
   margin: 1rem 0;
   padding: 0 1rem;
-  color: #2c3e50;
+}
+.input-group {
 
   > .input {
     width: 20%;

@@ -13,7 +13,8 @@ export default new Vuex.Store({
     },
     startDate: getDateBeforeDays(7),
     currenciesOptions: [],
-    chartData: null,
+    tableData: [],
+    chartData: [],
     amount:"",
     convertedValue: "",
   },
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     setConvertedValue(state, newValue){
       state.convertedValue = newValue
+    },
+    setTableData(state, newValue) {
+      state.tableData = newValue;
     },
   },
 
@@ -71,6 +75,15 @@ export default new Vuex.Store({
         RatesCurrency.push(rates[date][to]);
       }
 
+      var newList = [];
+      for (let index = 0; index < RatesCurrency.length; index++) {
+        newList.push({
+          price: RatesCurrency[index],
+          date: dates[index],
+        });
+      }
+      
+      commit("setTableData", newList);
       commit("setChartData", {
         title: `${from} to ${to} Chart`,
         labels: dates,

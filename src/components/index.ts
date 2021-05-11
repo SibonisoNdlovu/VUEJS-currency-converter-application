@@ -1,4 +1,5 @@
-import LineChart from "./LineChart";
-import InputGroup from "./InputGroup";
+import LineChart from "./LineChart/index.vue";
+import Converter from "./Converter/index.vue";
+import Table from "./Table/index.vue";
 
-export { LineChart, InputGroup };
+export { LineChart, Converter, Table };

@@ -1,34 +1,29 @@
 <template>
   <div id="app">
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
-    <InputGroup @inputData="updateMessage"></InputGroup>
-    <div id="chart">
-      <LineChart :chartData="childData"></LineChart>
+    <div>
+      <Converter></Converter>
     </div>
+    <div id="chart">
+      <LineChart></LineChart>
+    </div>
+    <Table></Table>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 // import HelloWorld from './components/HelloWorld.vue';
-import InputGroup from './components/InputGroup/index.vue';
+import Converter from './components/Converter/index.vue';
 import LineChart from './components/LineChart/index.vue';
+import Table from './components/Table/index.vue';
 
 @Component({
   components: {
     // HelloWorld,
-    InputGroup, 
+    Converter, 
     LineChart,
-  },
-  data: function() {
-    return {
-      childData: "",
-    };
-  },
-  methods: {
-    updateMessage(variable) {
-      this.childData = variable;
-    },
+    Table,
   },
 })
 export default class App extends Vue {}
@@ -36,12 +31,7 @@ export default class App extends Vue {}
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
 }
 #chart {
   width: 100%;
