@@ -4,12 +4,16 @@ It was very much challenging but managed to try my best to produce something tha
 
 The tests are not included as I did not get to completing that part of the assessment.
 
-I was not able to fully utilize the api as requested because the free addition had limited access. Unfortunately for converting I could only use USD as the base currency and decided to use it just so I can have at least one API using the required endpoint.I however decided to change and use another API for the rest of the project.
+I was not able to fully utilize the api as requested because the free addition had limited access. Unfortunately for converting I could only use USD AS THE BASE CURRENCY and decided to use it just so I can have at least one API using the required endpoint.I however decided to change and use another API for the rest of the project.
 
 Thank you very much once again.
 
 Looking forward to hearing from you.
 
+Versions : 
+            Typescript @4.1.5
+            VueJs @2.6.12
+            Vuex @3.6.2
 ## Project setup
 
 ```

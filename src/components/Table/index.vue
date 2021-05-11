@@ -33,7 +33,10 @@ import { mapState } from "vuex";
         },
     },
     computed:{
+       //table data is populated from store
         ...mapState(["tableData"]),
+
+        //commented out the sort functionality as it was giving me issues
 
     //     sortedData:function() {
     //     return this.tableData.sort((a,b) => {
