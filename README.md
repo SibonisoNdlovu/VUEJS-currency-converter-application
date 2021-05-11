@@ -1,3 +1,6 @@
+Thank you very much for the opportunity to do this assessment.
+It was very much challenging but managed to try my best to produce something that is working.
+
 ## Project setup
 
 ```
