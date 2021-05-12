@@ -82,7 +82,7 @@ export default {
   methods: {
     ...mapActions(["getCurrenciesOptions", "getCurrencyRates", "convert" ]),
 
-
+    //gets the rates for the currency pairs
     handleGetCurrencyRates(days) {
       let { currencyCodeFrom, currencyCodeTo, startDate} = this;   
       startDate = getDateBeforeDays(days)
@@ -95,6 +95,8 @@ export default {
       
       this.$emit("inputData", this.chartData);
     },
+
+    //converts and display converted value
     handleConvertAmount() {
       const { currencyCodeFrom, currencyCodeTo, amount} = this;
       this.convert({

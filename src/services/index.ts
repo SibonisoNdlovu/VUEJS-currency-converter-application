@@ -22,7 +22,6 @@ export default {
       return null;
     }
   },
-
   async convert(amount:any, from:string, to:string) {
     try {
       const response = await api.get(`/latest.json?app_id=24f06b4b009348a1902fc558f8516018&base=${from}&symbols=${to}`);
@@ -32,10 +31,9 @@ export default {
       return {};
     }
   },
-
-  async getTimeSeries(start: any, end: any, from:string, to:string) {
+  async getTimeSeries(from:string,to:string,startDate:Date,endDate:String ) {
     try {
-      const response = await api.get(`/time-series.json?app_id=24f06b4b009348a1902fc558f8516018&start=${start}&end=${end}&base=${from}&symbols=${to}&prettyprint=1`);
+      const response = await api.get(`/time-series.json?app_id=24f06b4b009348a1902fc558f8516018&start=${startDate}&end=${endDate}&base=${from}&symbols=${to}&prettyprint=1`);
       return response.data;
     } catch (error) {
       console.log("Error on Convert\n", error);
