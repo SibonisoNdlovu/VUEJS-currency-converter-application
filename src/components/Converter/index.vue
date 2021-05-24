@@ -23,6 +23,7 @@
     </select>
     
     <input
+      id="amt"
       type="text"
       v-model="amount"
       placeholder="Amount"

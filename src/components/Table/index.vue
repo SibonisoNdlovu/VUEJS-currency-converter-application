@@ -3,7 +3,7 @@
     <table id="data">
     <thead>
       <tr>
-        <th>Date</th>
+        <th @click="sortByDate()">Date</th>
         <th>Price</th>
       </tr>
     </thead>
@@ -11,8 +11,8 @@
     <tr v-for="data in tableData"
         :key="data.date"
         :value="data.price">
-        <td @click="sort('date')">{{ data.date }}</td>
-        <td @click="sort('price')">{{ data.price }}</td>
+        <td>{{ data.date }}</td>
+        <td>{{ data.price }}</td>
     </tr>
     </tbody>
   </table>
@@ -20,34 +20,31 @@
 </template>
 
 <script>
-
 import { mapState } from "vuex";
   export default {
     methods:{
-        sort:function(s) {
-            //if s == current sort, reverse
-            if(s === this.currentSort) {
-            this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+        sortByDate:function() {
+            var newList = [];
+            if(this.currentSortDir ==='asc') {            
+              this.tableData.sort((a, b) => 
+                    a.date.localeCompare(b.date))
+                    .map((item) => newList.push(item));
+              this.currentSortDir = 'desc';
+            } else {
+              this.tableData.sort((a, b) => 
+                    b.date.localeCompare(a.date))
+                    .map((item) => newList.push(item));
+              this.currentSortDir = 'asc';
             }
-            this.currentSort = s;
         },
     },
     computed:{
        //table data is populated from store
         ...mapState(["tableData"]),
-
-        //commented out the sort functionality as it was giving me issues
-
-    //     sortedData:function() {
-    //     return this.tableData.sort((a,b) => {
-    //         let modifier = 1;
-    //         if(this.currentSortDir === 'desc') modifier = -1;
-    //         if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-    //         if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
-    //         return 0;
-    //     });
-    // },
-},
+    },
+    mounted() {
+      this.currentSortDir = 'asc';
+    },
 }
 </script>
 
