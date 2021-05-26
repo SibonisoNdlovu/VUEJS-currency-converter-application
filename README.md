@@ -1,4 +1,6 @@
 
+This is a VUEJS currency converter application
+
 ## Project setup
 
 ```
